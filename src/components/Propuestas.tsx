@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import ModalPropuestas from "./ModalPropuestas";
 import ModalDetalleMes from "./ModalDetalleMes";
 import axios from "axios";
