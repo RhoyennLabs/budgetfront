@@ -36,7 +36,7 @@ export const TodoList: React.FC = () => {
   const fetchTareas = async () => {
     setLoading(true);
     try {
-      const response = await axios.get("https://budgetapp.vercel.app/tareas");
+      const response = await axios.get("https://backendbudgetapp.onrender.com/tareas");
       setTareas(response.data);
     } catch (err) {
       console.error(err);
@@ -59,7 +59,7 @@ export const TodoList: React.FC = () => {
     if (!nombreTarea.trim()) return;
 
     try {
-      await axios.post("https://budgetapp.vercel.app/publicarTarea", {
+      await axios.post("https://backendbudgetapp.onrender.com/publicarTarea", {
         nombreTarea,
         estado: estadoSeleccionado,
         usuario: localStorage.getItem("usuario") // <-- Aquí puedes usar el real si lo tienes
