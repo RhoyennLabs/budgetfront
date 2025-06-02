@@ -37,6 +37,7 @@ export const TodoList: React.FC = () => {
     setLoading(true);
     try {
       const response = await axios.get("https://backendbudgetapp.onrender.com/tareas");
+      console.log(response.data)
       setTareas(response.data);
     } catch (err) {
       console.error(err);
