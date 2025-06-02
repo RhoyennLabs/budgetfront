@@ -83,7 +83,7 @@ export const TodoList: React.FC = () => {
     try {
       await axios.post("https://backendbudgetapp.onrender.com/updateTarea", {
         _id: tarea._id,
-        nuevoEstado
+        estado:nuevoEstado
       });
       fetchTareas(); // refrescar lista
     } catch (err) {
