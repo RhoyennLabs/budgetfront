@@ -37,7 +37,6 @@ export const TodoList: React.FC = () => {
     setLoading(true);
     try {
       const response = await axios.get("https://backendbudgetapp.onrender.com/tareas");
-      console.log(response.data)
       setTareas(response.data);
     } catch (err) {
       console.error(err);
@@ -63,14 +62,32 @@ export const TodoList: React.FC = () => {
       await axios.post("https://backendbudgetapp.onrender.com/publicarTarea", {
         nombreTarea,
         estado: estadoSeleccionado,
-        usuario: localStorage.getItem("usuario") // <-- Aquí puedes usar el real si lo tienes
+        usuario: localStorage.getItem("usuario")
       });
 
       setShowModal(false);
       setNombreTarea("");
-      fetchTareas(); // refresca la lista
+      fetchTareas();
     } catch (err) {
       console.error("Error al crear la tarea:", err);
+    }
+  };
+
+  const avanzarEstado = (estadoActual: string): string => {
+    const index = estadosOrden.indexOf(estadoActual);
+    return estadosOrden[(index + 1) % estadosOrden.length]; // ciclo de estados
+  };
+
+  const handleCambiarEstado = async (tarea: Tarea) => {
+    const nuevoEstado = avanzarEstado(tarea.estado);
+    try {
+      await axios.post("https://backendbudgetapp.onrender.com/updateTarea", {
+        _id: tarea._id,
+        nuevoEstado
+      });
+      fetchTareas(); // refrescar lista
+    } catch (err) {
+      console.error("Error al actualizar la tarea:", err);
     }
   };
 
@@ -89,9 +106,20 @@ export const TodoList: React.FC = () => {
             {tareasPorEstado(estado).map((tarea) => (
               <Card key={tarea._id} className="mb-3 shadow-sm">
                 <Card.Body>
-                  <Card.Title>{tarea.nombreTarea}</Card.Title>
+                  <Card.Title className="d-flex justify-content-between align-items-center">
+                    {tarea.nombreTarea}
+                    <Button
+                      variant="outline-secondary"
+                      size="sm"
+                      onClick={() => handleCambiarEstado(tarea)}
+                    >
+                      ...
+                    </Button>
+                  </Card.Title>
                   <Card.Text>
-                    <strong>Usuario:</strong> {tarea.usuario}
+                    <strong>Usuario:</strong> {tarea.usuario} <br />
+                    <em>Siguiente estado:</em>{" "}
+                    {avanzarEstado(tarea.estado)}
                   </Card.Text>
                 </Card.Body>
               </Card>
