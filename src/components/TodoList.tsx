@@ -113,7 +113,7 @@ export const TodoList: React.FC = () => {
                       size="sm"
                       onClick={() => handleCambiarEstado(tarea)}
                     >
-                      ...
+                       Mover
                     </Button>
                   </Card.Title>
                   <Card.Text>
