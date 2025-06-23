@@ -16,10 +16,10 @@ type Tarea = {
   _id: string;
   usuario: string;
   nombreTarea: string;
-  estado: "iniciada" | "en proceso" | "terminada";
+  estado: "No iniciada" | "en proceso" | "terminada";
 };
 
-const estadosOrden = ["iniciada", "en proceso", "terminada"];
+const estadosOrden = ["No iniciada", "en proceso", "terminada"];
 
 export const TodoList: React.FC = () => {
   const [tareas, setTareas] = useState<Tarea[]>([]);
@@ -37,6 +37,7 @@ export const TodoList: React.FC = () => {
     setLoading(true);
     try {
       const response = await axios.get("https://backendbudgetapp.onrender.com/tareas");
+      console.log(response)
       setTareas(response.data);
     } catch (err) {
       console.error(err);
@@ -80,6 +81,7 @@ export const TodoList: React.FC = () => {
 
   const handleCambiarEstado = async (tarea: Tarea) => {
     const nuevoEstado = avanzarEstado(tarea.estado);
+    console.log(nuevoEstado)
     try {
       await axios.post("https://backendbudgetapp.onrender.com/updateTarea", {
         _id: tarea._id,
@@ -114,6 +116,13 @@ export const TodoList: React.FC = () => {
                       onClick={() => handleCambiarEstado(tarea)}
                     >
                        Mover
+                    </Button>
+                    <Button
+                      variant="danger"
+                      size="sm"
+                      onClick={() => handleCambiarEstado(tarea)}
+                    >
+                      borrar
                     </Button>
                   </Card.Title>
                   <Card.Text>

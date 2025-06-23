@@ -95,7 +95,7 @@ const Propuestas = () => {
   const propuestasDeEsteMes = propuestasPorMes.filter(p => p.mes === mes.key);
   const hayPropuestaAprobada = propuestasDeEsteMes.some(
     p => p.aprobadaporyeniffer && p.aprobadaporrodrigo
-  );
+ );
 
   return (
     <Col key={mes.key} xs={12} md={6} lg={4} className="mb-4">
