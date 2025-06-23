@@ -92,7 +92,17 @@ export const TodoList: React.FC = () => {
       console.error("Error al actualizar la tarea:", err);
     }
   };
+  const handleBorrar = async (tarea: Tarea) => {
 
+    try {
+      await axios.post("https://backendbudgetapp.onrender.com/borrarTarea", {
+        _id: tarea._id
+      });
+      fetchTareas(); // refrescar lista
+    } catch (err) {
+      console.error("Error al actualizar la tarea:", err);
+    }
+  };
   return (
     <Container className="mt-4">
       {loading && (
@@ -120,7 +130,7 @@ export const TodoList: React.FC = () => {
                     <Button
                       variant="danger"
                       size="sm"
-                      onClick={() => handleCambiarEstado(tarea)}
+                      onClick={() => handleBorrar(tarea)}
                     >
                       borrar
                     </Button>
