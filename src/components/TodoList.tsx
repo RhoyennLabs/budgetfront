@@ -57,6 +57,10 @@ export const TodoList: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if(localStorage.getItem("usuario")=="test"){
+      alert("los usuarios test no pueden publicar tareas.")
+      return
+    }
     if (!nombreTarea.trim()) return;
 
     try {
@@ -80,6 +84,10 @@ export const TodoList: React.FC = () => {
   };
 
   const handleCambiarEstado = async (tarea: Tarea) => {
+    if(localStorage.getItem("usuario")=="test"){
+      alert("los usuarios test no pueden cambiar estados.")
+      return
+    }
     const nuevoEstado = avanzarEstado(tarea.estado);
     console.log(nuevoEstado)
     try {

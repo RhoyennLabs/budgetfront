@@ -48,6 +48,10 @@ const Propuestas = () => {
 
   const handleAgregarPropuesta = async (mes: string, propuesta: Propuesta) => {
     try {
+      if(localStorage.getItem("usuario")=="test"){
+        alert("los usuarios test no pueden agregar propuestas.")
+        return
+      }
       await axios.post(
         "https://backendbudgetapp.onrender.com/agregarPropuesta",
         {

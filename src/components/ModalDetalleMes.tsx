@@ -47,6 +47,10 @@ const ModalDetalleMes: React.FC<Props> = ({ show, onClose, propuestas, titulo, o
    
 try {
   const usuario = localStorage.getItem("usuario")
+  if(localStorage.getItem("usuario")=="test"){
+    alert("los usuarios test no pueden aprobar propuestas.")
+    return
+  }
   const response = await axios.post("https://backendbudgetapp.onrender.com/aprobar", {
     _id,
     usuario

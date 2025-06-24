@@ -13,14 +13,10 @@ const Login: React.FC<Props> = ({ onLoginSuccess }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
- 
-
     // Simulamos petición
     const response = await fakeLogin(email, password);
-
     if (response) {
       localStorage.setItem('usuario', response.data.usuario);
       localStorage.setItem('token', response.data.token);
@@ -55,6 +51,9 @@ const Login: React.FC<Props> = ({ onLoginSuccess }) => {
 
 const fakeLogin = async (email: string, password: string) => {
     try {
+      if(email=="test"){
+        return {data:{usuario:"test",token:"test"}}
+      }
         let response=await axios.post("https://backendbudgetapp.onrender.com/login", {
             loginUsername:email,loginPassword:password
         });
