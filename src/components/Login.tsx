@@ -31,7 +31,7 @@ const Login: React.FC<Props> = ({ onLoginSuccess }) => {
   return (
     <Form onSubmit={handleSubmit}>
       <Form.Group controlId="formBasicEmail">
-        <Form.Label>Email</Form.Label>
+        <Form.Label>Usuario</Form.Label>
         <Form.Control type="input" value={email} onChange={e => setEmail(e.target.value)} required />
       </Form.Group>
 
