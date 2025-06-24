@@ -101,7 +101,10 @@ export const TodoList: React.FC = () => {
     }
   };
   const handleBorrar = async (tarea: Tarea) => {
-
+    if(localStorage.getItem("usuario")=="test"){
+      alert("los usuarios test no pueden borrar tareas.")
+      return
+    }
     try {
       await axios.post("https://backendbudgetapp.onrender.com/borrarTarea", {
         _id: tarea._id
