@@ -8,9 +8,9 @@ import { Button, ButtonGroup } from 'react-bootstrap';
 
 const App: React.FC = () => {
   const [autenticado, setAutenticado] = useState(false);
-  const [feature, setFeature] = useState<'propuestas' | 'todolist' | 'otra'>('propuestas');
+  const [feature, setFeature] = useState<'propuestas' | 'todolist' >('propuestas');
 
-  function cambiarFeature(nuevaFeature: 'propuestas' | 'todolist' | 'otra') {
+  function cambiarFeature(nuevaFeature: 'propuestas' | 'todolist' ) {
     setFeature(nuevaFeature);
   }
 
@@ -48,16 +48,7 @@ const App: React.FC = () => {
               >
               TodoList
             </Button>
-            <Button
-              variant={feature === 'otra' ? 'primary' : 'outline-primary'}
-              style={{
-                flex: 1,
-                borderRadius: 0,
-              }}
-              onClick={() => cambiarFeature('otra')}
-            >
-              Otra
-            </Button>
+     
           </ButtonGroup>
         </div>
       )}
